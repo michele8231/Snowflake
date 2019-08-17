@@ -34,6 +34,10 @@ void RfCommClient::ClientResponseCallBack(const std_msgs::String::ConstPtr& comm
 void RfCommClient::ClientCommandCallBack(std::string command) {
 	std_msgs::String msg;
 	msg.data = std::move(command);
+	ROS_INFO("%s", msg.data.c_str());
+	while (client_publisher.getNumSubscribers() <= 0) {
+		// its too early to publish
+	}
 	client_publisher.publish(msg);
 	ROS_INFO("Published message");
 }

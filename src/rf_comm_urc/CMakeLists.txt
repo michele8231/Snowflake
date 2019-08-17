@@ -140,6 +140,7 @@ include_directories(
 ## Declare a C++ executable
 # add_executable(sample_package_node src/sample_package_node.cpp)
 add_executable(rf_comm_server_node src/rf_comm_server_node.cpp src/RfCommServerNode.cpp include/RfCommServerNode.h)
+add_executable(rf_comm_client_node src/rf_comm_client_node.cpp src/RfCommClientNode.cpp include/RfCommClientNode.h)
 
 
 ## Add cmake target dependencies of the executable
@@ -151,6 +152,7 @@ add_executable(rf_comm_server_node src/rf_comm_server_node.cpp src/RfCommServerN
 #   ${catkin_LIBRARIES}
 # )
 target_link_libraries(rf_comm_server_node ${catkin_LIBRARIES} ${sb_utils_LIBRARIES})
+target_link_libraries(rf_comm_client_node ${catkin_LIBRARIES} ${sb_utils_LIBRARIES})
 
 #############
 ## Install ##

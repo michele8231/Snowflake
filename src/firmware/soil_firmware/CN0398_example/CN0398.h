@@ -58,7 +58,7 @@ enum {
     PHTHALATE,
     TARTRATE,
     TRIS,
-    PH4,
+    PH_4,
     PH10,
     NUMBER_OF_SOLUTIONS
 };
@@ -177,7 +177,7 @@ void CN0398_init();
 void CN0398_set_data(void);
 void CN0398_display_data(void);
 
-void CN0398_calibrate_ph(void);
+void CN0398_calibrate_ph(char response);
 void CN0398_print_calibration_solutions(void);
 
 void CN0398_set_use_nernst(bool state);

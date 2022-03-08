@@ -446,8 +446,11 @@ void CN0398_display_data(void) {
     Serial.println("");
 }
 
-void CN0398_calibrate_ph(char response) {
-    
+void CN0398_calibrate_ph(void) {
+    Serial.println(F("Do you want to calibrate offset voltage [y/N]?"));
+    char response = Serial.read();
+    Serial.println();
+
     if (response == 'y' || response == 'Y') {
         Serial.println(F(
         "Calibration step 0. Short the pH probe and press any key to "
@@ -519,8 +522,6 @@ void CN0398_calibrate_ph(char response) {
     CN0398_calibrate_ph_pt1(temperature);
     Serial.println();
     Serial.println();
-    
-    
 }
 
 void CN0398_print_calibration_solutions(void) {

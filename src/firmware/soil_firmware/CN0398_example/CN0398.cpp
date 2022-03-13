@@ -446,13 +446,25 @@ void CN0398_display_data(void) {
     Serial.println("");
 }
 
-void CN0398_calibrate_ph(char response) {
+void CN0398_calibrate_ph(void) {
+    char response;
+    Serial.println(F("Do you want to calibrate offset voltage [y/N]?"));
+              Serial.println(Serial.readString());
+              while (Serial.available() == 0) {
+                
+              }
+              response = Serial.read();
     
     if (response == 'y' || response == 'Y') {
         Serial.println(F(
         "Calibration step 0. Short the pH probe and press any key to "
         "calibrate."));
+        Serial.println(Serial.readString());
+        while (Serial.available() == 0) {
+                
+        }
         response = Serial.read();
+        Serial.println(response);
         CN0398_calibrate_ph_offset();
     }
     CN0398_print_calibration_solutions();
@@ -461,6 +473,10 @@ void CN0398_calibrate_ph(char response) {
     while (!response_ok) {
         Serial.println(
         F("Input calibration solution used for first step [1-9][a-e]:"));
+        Serial.println(Serial.readString());
+        while (Serial.available() == 0) {
+                
+        }
         response = Serial.read();
         if (isDigit(response)) {
             response_ok = true;
@@ -485,6 +501,10 @@ void CN0398_calibrate_ph(char response) {
     Serial.println(F(
     "Calibration step 1. Place pH probe in first calibration solution and "
     "press any key to start calibration."));
+    Serial.println(Serial.readString());
+    while (Serial.available() == 0) {
+            
+    }
     response = Serial.read();
     CN0398_calibrate_ph_pt0(temperature);
 
@@ -492,6 +512,10 @@ void CN0398_calibrate_ph(char response) {
     while (!response_ok) {
         Serial.println(
         F("Input calibration solution used for second step [1-9][a-e]:"));
+        Serial.println(Serial.readString());
+        while (Serial.available() == 0) {
+                
+        }
         response = Serial.read();
         if (isDigit(response)) {
             response_ok = true;
@@ -515,6 +539,10 @@ void CN0398_calibrate_ph(char response) {
     Serial.println(F(
     "Calibration step 2. Place pH probe in second calibration solution and "
     "press any key to start calibration."));
+    Serial.println(Serial.readString());
+    while (Serial.available() == 0) {
+            
+    }
     response = Serial.read();
     CN0398_calibrate_ph_pt1(temperature);
     Serial.println();

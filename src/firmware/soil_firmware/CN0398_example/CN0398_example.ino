@@ -32,31 +32,28 @@ void loop() {
     }
     
     char response = Serial.read();
-    Serial.println(response);
-          
-          if (response == 'y' || response == 'Y') {
-              Serial.println(F("Do you want to calibrate offset voltage [y/N]?"));
-    
-              while (Serial.available() == 0) {
-                Serial.println("hello");
-              }
-              response = Serial.read();
-              Serial.println(response);
-              CN0398_calibrate_ph(response);
-        } else {
-            CN0398_set_use_nernst(true);
-            Serial.println("Do you want to load default calibration?[y/N]. If not[N], the Nernst equation will be used.");
-            response = Serial.read();
-            if (response == 'y' || response == 'Y') {
-              CN0398_set_use_nernst(false);
-            }
-            Serial.println();
-        }
+        
+    if (response == 'y' || response == 'Y') {
+        
+        CN0398_calibrate_ph();
+  } else {
+      CN0398_set_use_nernst(true);
+      Serial.println("Do you want to load default calibration?[y/N]. If not[N], the Nernst equation will be used.");
+      Serial.println(Serial.readString());
+      while (Serial.available() == 0) {
+              
+      }
+      response = Serial.read();
+      if (response == 'y' || response == 'Y') {
+        CN0398_set_use_nernst(false);
+      }
+      Serial.println();
   }
-  /*
+  }
+  
   delay(DISPLAY_REFRESH);
   CN0398_set_data();
   CN0398_display_data();
-  */
+ 
 }
   
